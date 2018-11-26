@@ -2,11 +2,14 @@ from graphics import *
 import random as rand
 
 def drawPlayScreen(win):
+    undrawAll(win)
     '''Score, Powers, Extras and Lives Tab'''
-    rightTab = Rectangle(Point(600,0), Point(800, 800))
-    rightTab.setWidth(0)
-    rightTab.setFill("grey")
+    rightTab = Image(Point(700, 400), "../resources/rightTab.gif")
     rightTab.draw(win)
+    # rightTab = Rectangle(Point(600,0), Point(800, 800))
+    # rightTab.setWidth(0)
+    # rightTab.setFill("grey")
+    # rightTab.draw(win)
     
     '''Draws the Play Area itself'''
     leftTab = Rectangle(Point(0, 0), Point(600, 800))
@@ -23,3 +26,7 @@ def drawStars(win):
         y = rand.randint(0, 800-1)
         '''Draws the pixel at the coordinate and the color provided'''
         win.plotPixel(x, y, "white")
+        
+def undrawAll(win):
+    for i in win.items:
+        i.undraw(win)

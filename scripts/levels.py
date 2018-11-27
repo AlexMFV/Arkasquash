@@ -4,11 +4,11 @@ from blocks import *
 import common_variables as var
 
 def drawLevel(win, level):
-    if var.level_num == 1:
+    if level == 1:
         drawLevel1(win)
-    elif var.level_num == 2:
+    elif level == 2:
         drawLevel2(win)
-    elif var.level_num == 3:
+    elif level == 3:
         drawLevel3(win)
     # else:
     #     drawEditorLevel(win)

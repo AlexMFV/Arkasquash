@@ -1,5 +1,7 @@
+from graphics import *
+
 '''0 - Level Editor / 1,2,3 - Normal Levels'''
-level_num = 2
+level_num = 3
 
 '''Score, Powers, Extras and Lives'''
 score = 0
@@ -17,3 +19,8 @@ blocks = []
 block_colors = []
 block_outline = 1
 outlineColor = "white"
+
+'''Strings for Scores, Lives, Extras and Powers'''
+hearts = ["one", "two", "three"]
+livesText = Text(Point(690, 715), "")
+livesImage = 0

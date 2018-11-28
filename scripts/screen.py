@@ -6,10 +6,6 @@ def drawPlayScreen(win):
     '''Score, Powers, Extras and Lives Tab'''
     rightTab = Image(Point(700, 400), "../resources/rightTab.gif")
     rightTab.draw(win)
-    # rightTab = Rectangle(Point(600,0), Point(800, 800))
-    # rightTab.setWidth(0)
-    # rightTab.setFill("grey")
-    # rightTab.draw(win)
     
     '''Draws the Play Area itself'''
     leftTab = Rectangle(Point(0, 0), Point(600, 800))
@@ -29,4 +25,4 @@ def drawStars(win):
         
 def undrawAll(win):
     for i in win.items:
-        i.undraw(win)
+        i.undraw()

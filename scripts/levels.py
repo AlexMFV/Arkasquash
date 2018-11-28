@@ -1,6 +1,7 @@
 from graphics import *
 from screen import *
 from blocks import *
+import gameStates as state
 import common_variables as var
 
 def drawLevel(win, level):
@@ -10,8 +11,9 @@ def drawLevel(win, level):
         drawLevel2(win)
     elif level == 3:
         drawLevel3(win)
-    # else:
-    #     drawEditorLevel(win)
+    
+    # while True:
+    #     update(state.FPS)
         
 def drawLevel1(win):
     drawPlayScreen(win)

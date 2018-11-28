@@ -1,5 +1,8 @@
 from graphics import *
 import gameStates as state
+from levels import drawLevel
+
+from menu import mainMenu
 
 def main():
     win = GraphWin("Arkasquash - Alexandre Valente", 800, 800, autoflush=False)
@@ -12,24 +15,24 @@ def startApplication(win):
     
     while not hasExited:
         if gameController == state.MAIN_MENU:
-            mainMenu(win, gameController)
+            gameController = mainMenu(win, gameController)
             
         elif gameController == state.GAME_STARTED:
-            playGame(win, gameController)
+            gameController = playGame(win, gameController)
             
         elif gameController == state.HIGH_SCORES:
-            highScores(win, gameController)
+            gameController = highScores(win, gameController)
             
         elif gameController == state.INST_MENU:
-            instructionsMenu(win, gameController)
+            gameController = instructionsMenu(win, gameController)
             
         elif gameController == state.LEVEL_EDITOR:
-            levelEditor(win, gameController)
+            gameController = levelEditor(win, gameController)
             
-        elif gameControler == state.CARACTER_SEL:
-            caracterSelection(win, gameController)
+        elif gameController == state.CARACTER_SEL:
+            gameController = caracterSelection(win, gameController)
             
-        elif gameController == state.GAME_EXIT or win.close()
+        elif gameController == state.GAME_EXIT or win.closed:
             hasExited = True
             
         #update(state.FPS)

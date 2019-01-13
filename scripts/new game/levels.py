@@ -13,12 +13,13 @@ def drawLevel(win, gameVariables):
         drawLevel3(win, gameVariables)
     
     drawPlayer(win, gameVariables, getPlayerType())
+    drawBall(win, gameVariables)
     # while True:
     #     update(state.FPS)
         
 def drawLevel1(win, gameVariables):
     drawPlayScreen(win)
-    for col in range(10):
+    for col in range(9, 5, -1):
         for row in range(10):
             x1 = var.side_offset + row * var.block_width
             y1 = var.top_offset + col * var.block_height
@@ -84,6 +85,14 @@ def drawPlayer(win, gameVariables, type):
     #box.setOutline("White")
     box.draw(win)
     gameVariables.append(box)
+    
+def drawBall(win, vars):
+    ball = Circle(Point(vars[var.player].getAnchor().getX(),
+    vars[var.player].getAnchor().getY() - 20), var.ball_rad)
+    ball.setFill("purple")
+    ball.setOutline("white")
+    ball.draw(win)
+    vars.append(ball)
     
 def getPlayerType():
     return "p1"

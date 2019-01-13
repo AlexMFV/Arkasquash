@@ -49,6 +49,8 @@ def playGame(win, state, gameVariables):
     hasStarted = True
     isPlaying = False
     speed = 50
+    ballSpeed = 5
+    ballDir = -1
     
     '''Game Loop'''
     while hasStarted:
@@ -56,14 +58,22 @@ def playGame(win, state, gameVariables):
         
         if key == 'space' and not isPlaying:
             isPlaying = True
-            startBall()
-        
+            ballDir = startBall()
+
         if key == 'Left' or key == 'Right':
             movePlayer(win, key, gameVariables[var.player], speed)
             
-        if isPlaying:
-            moveBall()
-            checkCollisions()
+        if not isPlaying:
+            if gameVariables[var.ball].getCenter().getX() != gameVariables[var.player].getAnchor().getX():
+                x = gameVariables[var.player].getAnchor().getX() - gameVariables[var.ball].getCenter().getX()
+                gameVariables[var.ball].move(x, 0)
+            
+        if isPlaying and dir != -1:
+            ballDir = checkCollisions(ballDir, gameVariables, var.ball_rad)
+            moveBall(ballDir, ballSpeed, gameVariables)
+        elif isPlaying and dir == 1:
+            loseLife(gameVariables)
+            isPlaying = restartGame()
         
         if gameVariables[var.lives] < 0:
             isPlaying = False

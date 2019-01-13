@@ -10,6 +10,7 @@ blockColors = 7
 livesText = 8
 livesImage = 9
 player = 10
+ball = 11
 
 '''Screen Sizes'''
 top_offset = 50
@@ -20,6 +21,7 @@ block_outline = 1
 outlineColor = "white"
 playerHeight = 20
 playerLength = 100
+ball_rad = 8
 
 '''Hearts'''
 hearts = ["one", "two", "three"]

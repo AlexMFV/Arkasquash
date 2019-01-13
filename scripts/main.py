@@ -1,6 +1,7 @@
 from graphics import *
 import gameStates as state
-from levels import drawLevel
+import levels as level
+import common_variables as var
 
 from menu import mainMenu
 
@@ -36,5 +37,9 @@ def startApplication(win):
             hasExited = True
             
         #update(state.FPS)
-    
+ 
+#------------ Main Game --------------
+def playGame(win, gameController):
+    level.drawLevel(win, var.level_num)
+
 main()

@@ -1,7 +1,7 @@
 from graphics import *
 
 '''0 - Level Editor / 1,2,3 - Normal Levels'''
-level_num = 2
+level_num = 1
 
 '''Score, Powers, Extras and Lives'''
 score = 0

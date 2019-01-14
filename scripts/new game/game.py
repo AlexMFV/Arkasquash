@@ -70,41 +70,57 @@ def checkCollisions(dir, gameVariables, rad):
             if ballX <= bX and ballX >= bX - var.block_width:
                 if ballY - rad <= bY and ballY - rad >= bY - rad:
                     dir = changeDirection('-', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             if ballX - rad <= bX and ballX - rad >= bX - rad:
                 if ballY <= bY and ballY >= bY - var.block_height:
                     dir = changeDirection('+', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             
         if d[dir] == "RU": #DONE
             if ballX >= bX and ballX <= bX + var.block_width:
                 if ballY - rad <= bY + var.block_height and ballY - rad >= (bY + var.block_height) - rad:
                     dir = changeDirection('+', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             if ballX + rad >= bX and ballX + rad <= bX + rad:
                 if ballY >= bY and ballY <= bY + var.block_height:
                     dir = changeDirection('-', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             
         if d[dir] == "RD": #DONE
             if ballX >= bX and ballX <= bX + var.block_width:
                 if ballY + rad >= bY and ballY + rad <= bY + rad:
                     dir = changeDirection('-', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             if ballX + rad >= bX and ballX + rad <= bX + rad:
                 if ballY >= bY and ballY <= bY + var.block_height:
                     dir = changeDirection('+', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             
         if d[dir] == "LD": #DONE
             if ballX <= bX and ballX >= (bX - var.block_width):
                 if ballY + rad >= bY - var.block_height and ballY + rad <= (bY - var.block_height) + rad:
                     dir = changeDirection('+', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             if ballX - rad <= bX and ballX - rad >= bX - rad:
                 if ballY <= bY and ballY >= bY - var.block_height:
                     dir = changeDirection('-', dir)
+                    bs.addPoints(aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
+                    break
             
         aux += 1
         
@@ -138,9 +154,3 @@ def moveBall(dir, speed, gameVariables):
         
     if directions[dir] == "LD":
         gameVariables[var.ball].move(-speed, speed)
-
-def loseLife():
-    pass
-
-def restartGame():
-    pass

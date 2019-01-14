@@ -4,6 +4,7 @@ from levels import *
 import common as var
 import states
 from game import *
+import lives as l
 
 def main():
     win = GraphWin("Arkasquash - Alexandre Valente", 800, 800, autoflush=False) #, autoflush=True
@@ -11,7 +12,7 @@ def main():
     win.close()
     
 def startApplication(win):
-    gameVariables = [1, 0, 0, 0, 0, 3, [], [], Text(Point(690, 715), ""), 0] #Player is appended later
+    gameVariables = [1, 0, 0, 0, 0, 3, [], [], Text(Point(690, 715), ""), Image(Point(0,0), "")] #Player is appended later
     
     hasExited = False
     state = states.MAIN_MENU
@@ -51,6 +52,7 @@ def playGame(win, state, gameVariables):
     speed = 50
     ballSpeed = 5
     ballDir = -1
+    l.drawHearts(win, gameVariables)
     
     '''Game Loop'''
     while hasStarted:
@@ -67,16 +69,26 @@ def playGame(win, state, gameVariables):
             if gameVariables[var.ball].getCenter().getX() != gameVariables[var.player].getAnchor().getX():
                 x = gameVariables[var.player].getAnchor().getX() - gameVariables[var.ball].getCenter().getX()
                 gameVariables[var.ball].move(x, 0)
+            if gameVariables[var.ball].getCenter().getY() >= 750:
+                gameVariables[var.ball].move(0, -10)
             
-        if isPlaying and dir != -1:
+        if isPlaying and ballDir != -1:
             ballDir = checkCollisions(ballDir, gameVariables, var.ball_rad)
             moveBall(ballDir, ballSpeed, gameVariables)
-        elif isPlaying and dir == 1:
-            loseLife(gameVariables)
-            isPlaying = restartGame()
-        
-        if gameVariables[var.lives] < 0:
+        elif isPlaying and ballDir == -1:
+            l.removeHeart(gameVariables)
+            l.drawHearts(win, gameVariables)
             isPlaying = False
+            
+        if isPlaying and len(gameVariables[var.blocks]) <= 0:
+            nextLevel(gameVariables)
+            drawLevel(win, gameVariables)
+            l.drawHearts(win, gameVariables)
+            isPlaying = False
+        
+        if gameVariables[var.lives] <= 0:
+            isPlaying = False
+            hasStarted = False
     
         update(states.FPS)
         

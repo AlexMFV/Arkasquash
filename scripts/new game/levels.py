@@ -16,10 +16,16 @@ def drawLevel(win, gameVariables):
     drawBall(win, gameVariables)
     # while True:
     #     update(state.FPS)
+    
+def nextLevel(gameVars):
+    if gameVars[var.level] < 3:
+        gameVars[var.level] += 1
+    
+    gameVars[var.lives] += 1
         
 def drawLevel1(win, gameVariables):
     drawPlayScreen(win)
-    for col in range(9, 5, -1):
+    for col in range(9, 4, -1):
         for row in range(10):
             x1 = var.side_offset + row * var.block_width
             y1 = var.top_offset + col * var.block_height
@@ -96,4 +102,9 @@ def drawBall(win, vars):
     
 def getPlayerType():
     return "p1"
+    
+def drawInitialGame(win, gameVars, lives):
+    gameVars[var.livesImage] = Image(Point(690, 715), var.hearts[gameVars[var.lives]-1])
+    gameVars[var.livesImage].draw(win)
+    
     

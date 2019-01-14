@@ -7,6 +7,19 @@ def addBlock(win, pos1, pos2, gameVariables):
     gameVariables[var.blockColors].append(randomColor())
     drawBlock(win, -1, gameVariables[var.blocks], gameVariables[var.blockColors])
     
+def addPoints(idx, gameVars):
+    if gameVars[var.blockColors][idx] == "red":
+        scoreToAdd = 50
+    elif gameVars[var.blockColors][idx] == "green":
+        scoreToAdd = 100
+    elif gameVars[var.blockColors][idx] == "blue":
+        scoreToAdd = 150
+    else:
+        scoreToAdd = 1000
+    
+    gameVars[var.score] += scoreToAdd
+    #del gameVars[var.blockColors][idx]
+
 def removeBlock(idx, gameVars):
     gameVars[var.blocks][idx].undraw()
     del gameVars[var.blocks][idx]

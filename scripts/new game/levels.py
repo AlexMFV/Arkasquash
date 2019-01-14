@@ -12,16 +12,13 @@ def drawLevel(win, gameVariables):
     elif gameVariables[var.level] == 3:
         drawLevel3(win, gameVariables)
     
+    deletePlayerAndBall(win, gameVariables)
     drawPlayer(win, gameVariables, getPlayerType())
     drawBall(win, gameVariables)
-    # while True:
-    #     update(state.FPS)
     
 def nextLevel(gameVars):
-    if gameVars[var.level] < 3:
-        gameVars[var.level] += 1
-    
-    gameVars[var.lives] += 1
+    gameVars[var.level] += 1
+    #gameVars[var.lives] += 1 Add live on level completed
         
 def drawLevel1(win, gameVariables):
     drawPlayScreen(win)
@@ -34,7 +31,7 @@ def drawLevel1(win, gameVariables):
             addBlock(win, Point(x1, y1), Point(x2, y2), gameVariables)
             
 def drawLevel2(win, gameVariables):
-    drawPlayScreen(win)
+    #drawPlayScreen(win) Draws the level completely
     for col in range(10):
         for row in range(10 - col):
             x1 = var.side_offset + (var.block_width / 2 * col) + row * var.block_width
@@ -44,9 +41,9 @@ def drawLevel2(win, gameVariables):
             addBlock(win, Point(x1, y1), Point(x2, y2), gameVariables)
             
 def drawLevel3(win, gameVariables):
-    drawPlayScreen(win)
+    #drawPlayScreen(win) Draws the level completely
     aux = 8
-    for row in range(10):
+    for row in range(1):
         for col in range(10 - aux):
             x1 = var.side_offset + row * var.block_width
             y1 = var.top_offset + (aux/2 * var.block_height) + col * var.block_height
@@ -81,24 +78,29 @@ def drawStars(win):
         win.plotPixel(x, y, "white")
         
 def undrawAll(win):
-    for i in win.items:
-        i.undraw()
+    while len(win.items) != 0:
+        for i in win.items:
+            i.undraw()
         
 def drawPlayer(win, gameVariables, type):
-    #box = Rectangle(Point(250, 770), Point(350, 790))
     box = Image(Point(300, 780), "../../resources/"+ type + ".gif")
-    #box.setFill("green")
-    #box.setOutline("White")
     box.draw(win)
     gameVariables.append(box)
     
-def drawBall(win, vars):
+def drawBall(win, vars):    
     ball = Circle(Point(vars[var.player].getAnchor().getX(),
     vars[var.player].getAnchor().getY() - 20), var.ball_rad)
     ball.setFill("purple")
     ball.setOutline("white")
     ball.draw(win)
     vars.append(ball)
+    
+def deletePlayerAndBall(win, vars):
+    if len(vars) > var.ball:
+        vars[var.ball].undraw()
+        vars[var.player].undraw()
+        del vars[var.ball]
+        del vars[var.player]
     
 def getPlayerType():
     return "p1"

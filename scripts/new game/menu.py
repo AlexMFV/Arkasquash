@@ -32,8 +32,12 @@ def mainMenu(win, state):
     return state
 
 def drawMainMenu(win):
-    logo = Image(Point(400, 100), "../../resources/Arka.gif")
+    back = Image(Point(400, 400), "../../resources/background.gif")
+    back.draw(win)
+    logo = Image(Point(400, 125), "../../resources/Arka.gif")
     logo.draw(win)
+    logo2 = Image(Point(400, 300), "../../resources/Squash.gif")
+    logo2.draw(win)
     #drawMenuText(win)
     drawMenuButtons(win)
     

@@ -58,20 +58,24 @@ def playGame(win, state, gameVariables):
     while hasStarted:
         key = win.checkKey()
         
+        '''Game hasnt started, waiting for player to start'''
         if key == 'space' and not isPlaying:
             isPlaying = True
             ballDir = startBall()
 
+        '''Move player Paddle'''
         if key == 'Left' or key == 'Right':
             movePlayer(win, key, gameVariables[var.player], speed)
-            
+        
+        '''Move the paddle, while the game has not started'''
         if not isPlaying:
             if gameVariables[var.ball].getCenter().getX() != gameVariables[var.player].getAnchor().getX():
                 x = gameVariables[var.player].getAnchor().getX() - gameVariables[var.ball].getCenter().getX()
                 gameVariables[var.ball].move(x, 0)
             if gameVariables[var.ball].getCenter().getY() >= 750:
                 gameVariables[var.ball].move(0, -10)
-            
+        
+        '''Detect collisions, ball movement, when die lose live and manage hearts'''
         if isPlaying and ballDir != -1:
             ballDir = checkCollisions(ballDir, gameVariables, var.ball_rad)
             moveBall(ballDir, ballSpeed, gameVariables)
@@ -79,13 +83,19 @@ def playGame(win, state, gameVariables):
             l.removeHeart(gameVariables)
             l.drawHearts(win, gameVariables)
             isPlaying = False
-            
+          
+        '''When the number of blocks reaches 0, start next level and add heart'''
         if isPlaying and len(gameVariables[var.blocks]) <= 0:
             nextLevel(gameVariables)
             drawLevel(win, gameVariables)
             l.drawHearts(win, gameVariables)
             isPlaying = False
-        
+            ballDir = -1
+            
+        if gameVariables[var.level] > 3:
+            hasStarted = False
+    
+        '''When all lives are lost, end the game'''
         if gameVariables[var.lives] <= 0:
             isPlaying = False
             hasStarted = False

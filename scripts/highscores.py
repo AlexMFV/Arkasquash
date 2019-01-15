@@ -3,7 +3,7 @@ from pathlib import *
 from file import *
 
 def drawHighscores(win):
-    tab = Image(Point(400, 400), "../../resources/highscores.gif")
+    tab = Image(Point(400, 400), "../resources/highscores.gif")
     tab.draw(win)
     
     names = []
@@ -22,13 +22,15 @@ def drawHighscores(win):
     names, scores = scoresToList2(data)
         
     if len(scores) < 10:
+        scores = list(reversed(scores))
+        names = list(reversed(names))
         value = 10 - len(scores)
-        for i in range(value-1, 0, -1):
+        for i in range(value-1, -1, -1):
             scores.append(0)
             names.append("N/A")
-            
-    scores = list(reversed(scores))
-    names = list(reversed(names))
+    else:
+        scores = list(reversed(scores))
+        names = list(reversed(names))
     
     #First dashes and scores
     for i in range(10):

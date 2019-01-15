@@ -157,7 +157,7 @@ def moveBall(dir, speed, gameVariables):
         gameVariables[var.ball].move(-speed, speed)
         
 def showPause(win):
-    menu = Image(Point(300, 400), "../../resources/pause_menu.gif")
+    menu = Image(Point(300, 400), "../resources/pause_menu.gif")
     menu.draw(win)
     return menu
     

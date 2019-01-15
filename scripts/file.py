@@ -1,7 +1,7 @@
 from graphics import *
 
 def promptUsername(win, score):
-    tab = Image(Point(300, 400), "../../resources/scoreSub.gif")
+    tab = Image(Point(300, 400), "../resources/scoreSub.gif")
     tab.draw(win)
     score = Text(Point(398, 360), score)
     score.setSize(25)

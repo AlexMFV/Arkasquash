@@ -18,13 +18,16 @@ def drawLevel(win, gameVariables):
     drawBall(win, gameVariables)
     
 def nextLevel(gameVars):
+    thread = threading.Thread(target=playNextLevel)
+    thread.start() #Sound when you go to the next level
+    
     gameVars[var.level] += 1
     #gameVars[var.lives] += 1 Add live on level completed
         
 def drawLevel1(win, gameVariables):
     drawPlayScreen(win)
-    for col in range(9, 4, -1):
-        for row in range(10):
+    for col in range(9, 8, -1):
+        for row in range(1):
             x1 = var.side_offset + row * var.block_width
             y1 = var.top_offset + col * var.block_height
             x2 = x1 + var.block_width

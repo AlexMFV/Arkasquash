@@ -1,6 +1,8 @@
 from graphics import *
 import states
 from pathlib import *
+import threading
+from sound import *
 
 def mainMenu(win, state):
     '''Draw the MainMenu Buttons, Background and Animations'''
@@ -13,23 +15,32 @@ def mainMenu(win, state):
         if clicked != None:
             if pressedPlay(clicked):
                 state = states.GAME_STARTED
+                playButtonPress()
                 
             elif pressedHighScores(clicked):
                 state = states.HIGH_SCORES
+                playButtonPress()
                 
             elif pressedInstructions(clicked):
                 state = states.INST_MENU
+                playButtonPress()
                 
             #elif pressedLevelEditor(clicked):
                 #state = states.LEVEL_EDITOR
                 
             elif pressedCharSelection(clicked):
                 state = states.CARACTER_SEL
+                playButtonPress()
                 
             elif pressedExit(clicked):
                 state = states.GAME_EXIT
+                playButtonPress()
                 
     return state
+    
+def playButtonPress():
+    thread = threading.Thread(target=playButton)
+    thread.start()
 
 def drawMainMenu(win):
     back = Image(Point(400, 400), "../resources/background.gif")

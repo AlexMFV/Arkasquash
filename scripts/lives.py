@@ -2,8 +2,12 @@ import common as var
 from graphics import *
 import blocks as bl
 import states
+from sound import *
+import threading
 
 def removeHeart(gameVars):
+    thread = threading.Thread(target=playDeath)
+    thread.start() #Sound when the player dies
     gameVars[var.lives] -= 1
     
 def addHeart():
@@ -80,16 +84,16 @@ def explodeRocket(win, game, rad, x, y):
     blcks = game[var.blocks]
     for b in blcks:
         if checkInside(x-rad, y-rad, x+rad, y+rad, b.getP1().getX(), b.getP1().getY()):
-            bl.addPoints(win, aux, game)
+            bl.addPointsRaw(win, aux, game)
             bl.removeBlockRaw(b, game)
         elif checkInside(x-rad, y-rad, x+rad, y+rad, b.getP1().getX(), b.getP2().getY()):
-            bl.addPoints(win, aux, game)
+            bl.addPointsRaw(win, aux, game)
             bl.removeBlockRaw(b, game)
         elif checkInside(x-rad, y-rad, x+rad, y+rad, b.getP2().getX(), b.getP1().getY()):
-            bl.addPoints(win, aux, game)
+            bl.addPointsRaw(win, aux, game)
             bl.removeBlockRaw(b, game)
         elif checkInside(x-rad, y-rad, x+rad, y+rad, b.getP2().getX(), b.getP2().getY()):
-            bl.addPoints(win, aux, game)
+            bl.addPointsRaw(win, aux, game)
             bl.removeBlockRaw(b, game)
     game[var.rocketL].undraw()
     

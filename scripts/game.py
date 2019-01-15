@@ -2,6 +2,8 @@ from random import *
 import common as var
 import blocks as bs
 from graphics import *
+import threading
+from sound import *
 
 def movePlayer(win, key, player, speed):
     if key == 'Left' and player.getAnchor().getX() > 50:
@@ -50,11 +52,15 @@ def checkCollisions(win, dir, gameVariables, rad):
     if d[dir] == "RD":
         if ballY + rad >= playerY - (var.playerHeight /2) and ballY + rad <= playerY + (var.playerHeight /2):
             if ballX + rad >= playerX - (var.playerLength /2) and ballX + rad <= playerX + (var.playerLength /2):
+                thread = threading.Thread(target=playPaddleSound)
+                thread.start() #Sound of ball hitting the paddle
                 dir = changeDirection('-', dir)
         
     if d[dir] == "LD":
         if ballY + rad >= playerY - (var.playerHeight /2) and ballY + rad <= playerY + (var.playerHeight /2):
             if ballX + rad >= playerX - (var.playerLength /2) and ballX + rad <= playerX + (var.playerLength /2):
+                thread = threading.Thread(target=playPaddleSound)
+                thread.start() #Sound of ball hitting the paddle
                 dir = changeDirection('+', dir)
     
     '''Collisions with individual blocks'''

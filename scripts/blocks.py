@@ -2,6 +2,8 @@ from graphics import *
 import common as var
 import random as rand
 import lives as l
+from sound import *
+import threading
 
 def addBlock(win, pos1, pos2, gameVariables):
     gameVariables[var.blocks].append(Rectangle(pos1, pos2))
@@ -9,6 +11,10 @@ def addBlock(win, pos1, pos2, gameVariables):
     drawBlock(win, -1, gameVariables[var.blocks], gameVariables[var.blockColors])
     
 def addPoints(win, idx, gameVars):
+    
+    thread = threading.Thread(target=playBlockSound)
+    thread.start() #Sound when collide with block
+    
     if gameVars[var.blockColors][idx] == "red":
         scoreToAdd = 50
     elif gameVars[var.blockColors][idx] == "green":
@@ -25,9 +31,27 @@ def addPoints(win, idx, gameVars):
     gameVars[var.score] += scoreToAdd
     l.updateScore(gameVars)
     
+def addPointsRaw(win, idx, gameVars): #The same but does not play sound and does not give rocket
+
+    if gameVars[var.blockColors][idx] == "red":
+        scoreToAdd = 50
+    elif gameVars[var.blockColors][idx] == "green":
+        scoreToAdd = 100
+    elif gameVars[var.blockColors][idx] == "blue":
+        scoreToAdd = 150
+    else:
+        scoreToAdd = 1000
+    
+    gameVars[var.score] += scoreToAdd
+    l.updateScore(gameVars)
+    
 def getRocket():
     value = rand.randint(0, 1000)
     if value >= 0 and value < 100:
+        
+        thread = threading.Thread(target=playGetRocket)
+        thread.start() #Sound when you get a rocket
+        
         return 1
     else:
         return 0
@@ -35,11 +59,13 @@ def getRocket():
 def removeBlock(idx, gameVars):
     gameVars[var.blocks][idx].undraw()
     del gameVars[var.blocks][idx]
+    del gameVars[var.blockColors][idx]
     
 def removeBlockRaw(obj, gameVars):
     idx = gameVars[var.blocks].index(obj)
     gameVars[var.blocks][idx].undraw()
     gameVars[var.blocks].remove(obj)
+    del gameVars[var.blockColors][idx]
     
 def drawBlock(win, idx, blocks, block_colors):
     rect = blocks[idx]

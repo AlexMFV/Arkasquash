@@ -26,8 +26,8 @@ def nextLevel(gameVars):
         
 def drawLevel1(win, gameVariables):
     drawPlayScreen(win)
-    for col in range(9, 8, -1):
-        for row in range(1):
+    for col in range(9, 4, -1):
+        for row in range(10):
             x1 = var.side_offset + row * var.block_width
             y1 = var.top_offset + col * var.block_height
             x2 = x1 + var.block_width

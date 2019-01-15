@@ -41,9 +41,9 @@ def drawLevel2(win, gameVariables):
             addBlock(win, Point(x1, y1), Point(x2, y2), gameVariables)
             
 def drawLevel3(win, gameVariables):
-    #drawPlayScreen(win) Draws the level completely
+    #drawPlayScreen(win) #Draws the level completely
     aux = 8
-    for row in range(1):
+    for row in range(10):
         for col in range(10 - aux):
             x1 = var.side_offset + row * var.block_width
             y1 = var.top_offset + (aux/2 * var.block_height) + col * var.block_height

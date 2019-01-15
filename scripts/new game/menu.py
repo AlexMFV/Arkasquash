@@ -19,8 +19,8 @@ def mainMenu(win, state):
             elif pressedInstructions(clicked):
                 state = states.INST_MENU
                 
-            elif pressedLevelEditor(clicked):
-                state = states.LEVEL_EDITOR
+            #elif pressedLevelEditor(clicked):
+                #state = states.LEVEL_EDITOR
                 
             elif pressedCharSelection(clicked):
                 state = states.CARACTER_SEL
@@ -28,7 +28,6 @@ def mainMenu(win, state):
             elif pressedExit(clicked):
                 state = states.GAME_EXIT
                 
-        #updateMenuAnimation(win)
     return state
 
 def drawMainMenu(win):
@@ -38,24 +37,21 @@ def drawMainMenu(win):
     logo.draw(win)
     logo2 = Image(Point(400, 300), "../../resources/Squash.gif")
     logo2.draw(win)
-    #drawMenuText(win)
     drawMenuButtons(win)
     
 def drawMenuButtons(win):
-    playBtn = Rectangle(Point(50, 450), Point(250, 550))
+    playBtn = Image(Point(150, 500), "../../resources/play.gif")
     playBtn.draw(win)
-    playBtn = Rectangle(Point(300, 450), Point(500, 550))
+    #playBtn = Image(Point(400, 500), "../../resources/editor.gif")
+    #playBtn.draw(win)
+    playBtn = Image(Point(650, 500), "../../resources/tutorial.gif")
     playBtn.draw(win)
-    playBtn = Rectangle(Point(550, 450), Point(750, 550))
+    playBtn = Image(Point(150, 650), "../../resources/scores.gif")
     playBtn.draw(win)
-    playBtn = Rectangle(Point(50, 600), Point(250, 700))
+    playBtn = Image(Point(400, 650), "../../resources/player.gif")
     playBtn.draw(win)
-    playBtn = Rectangle(Point(300, 600), Point(500, 700))
+    playBtn = Image(Point(650, 650), "../../resources/exit.gif")
     playBtn.draw(win)
-    playBtn = Rectangle(Point(550, 600), Point(750, 700))
-    playBtn.draw(win)
-#def drawButtonFrame(win, pos1, pos2):
-    
 
 '''Check for all the pressed in the Menu Buttons'''   
 def pressedPlay(clickPos):

@@ -1,6 +1,7 @@
 from random import *
 import common as var
 import blocks as bs
+from graphics import *
 
 def movePlayer(win, key, player, speed):
     if key == 'Left' and player.getAnchor().getX() > 50:
@@ -11,7 +12,7 @@ def movePlayer(win, key, player, speed):
 def startBall():
     return randint(0, 1)
 
-def checkCollisions(dir, gameVariables, rad):
+def checkCollisions(win, dir, gameVariables, rad):
     d = ["LU", "RU", "RD", "LD"]
     
     ballX = gameVariables[var.ball].getCenter().getX()
@@ -70,13 +71,13 @@ def checkCollisions(dir, gameVariables, rad):
             if ballX <= bX and ballX >= bX - var.block_width:
                 if ballY - rad <= bY and ballY - rad >= bY - rad:
                     dir = changeDirection('-', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             if ballX - rad <= bX and ballX - rad >= bX - rad:
                 if ballY <= bY and ballY >= bY - var.block_height:
                     dir = changeDirection('+', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             
@@ -84,13 +85,13 @@ def checkCollisions(dir, gameVariables, rad):
             if ballX >= bX and ballX <= bX + var.block_width:
                 if ballY - rad <= bY + var.block_height and ballY - rad >= (bY + var.block_height) - rad:
                     dir = changeDirection('+', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             if ballX + rad >= bX and ballX + rad <= bX + rad:
                 if ballY >= bY and ballY <= bY + var.block_height:
                     dir = changeDirection('-', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             
@@ -98,13 +99,13 @@ def checkCollisions(dir, gameVariables, rad):
             if ballX >= bX and ballX <= bX + var.block_width:
                 if ballY + rad >= bY and ballY + rad <= bY + rad:
                     dir = changeDirection('-', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             if ballX + rad >= bX and ballX + rad <= bX + rad:
                 if ballY >= bY and ballY <= bY + var.block_height:
                     dir = changeDirection('+', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             
@@ -112,13 +113,13 @@ def checkCollisions(dir, gameVariables, rad):
             if ballX <= bX and ballX >= (bX - var.block_width):
                 if ballY + rad >= bY - var.block_height and ballY + rad <= (bY - var.block_height) + rad:
                     dir = changeDirection('+', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             if ballX - rad <= bX and ballX - rad >= bX - rad:
                 if ballY <= bY and ballY >= bY - var.block_height:
                     dir = changeDirection('-', dir)
-                    bs.addPoints(aux, gameVariables)
+                    bs.addPoints(win, aux, gameVariables)
                     bs.removeBlock(aux, gameVariables)
                     break
             
@@ -154,3 +155,32 @@ def moveBall(dir, speed, gameVariables):
         
     if directions[dir] == "LD":
         gameVariables[var.ball].move(-speed, speed)
+        
+def showPause(win):
+    menu = Image(Point(300, 400), "../../resources/pause_menu.gif")
+    menu.draw(win)
+    return menu
+    
+def closePause(menu):
+    menu.undraw()
+    
+def resumeButton(mouse):
+    if mouse != None:
+        if mouse.getX() >= 196 and mouse.getX() <= 396:
+            if mouse.getY() >= 390 and mouse.getY() <= 450:
+                return True
+            else:
+                return False
+        else:
+            return False
+        
+def mainMenuButton(mouse):
+    if mouse != None:
+        if mouse.getX() >= 196 and mouse.getX() <= 396:
+            if mouse.getY() >= 470 and mouse.getY() <= 525:
+                return True
+            else:
+                return False
+        else:
+            return False
+    

@@ -76,10 +76,17 @@ def drawPlayScreen(win):
     
 def drawStars(win):
     for i in range(1000):
+        big = rand.randint(0, 100)
         x = rand.randint(0, 600-1)
         y = rand.randint(0, 800-1)
-        '''Draws the pixel at the coordinate and the color provided'''
-        win.plotPixel(x, y, "white")
+        if big >= 90: #Draw big
+            win.plotPixel(x, y, "white")
+            win.plotPixel(x+1, y+1, "white")
+            win.plotPixel(x+1, y, "white")
+            win.plotPixel(x, y+1, "white")
+        else:
+            '''Draws the pixel at the coordinate and the color provided'''
+            win.plotPixel(x, y, "white")
         
 def undrawAll(win):
     while len(win.items) != 0:

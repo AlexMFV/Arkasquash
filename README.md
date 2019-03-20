@@ -35,5 +35,8 @@
 - **Esc**ape: Exit menus or pause the game.
 - **Z** key: Use power ups.
 
+### Submitted Version
+[This version was the one that was submitted to the competition](https://github.com/AlexMFV/Arkasquash/tree/ffae32024f2ae10c642d1ab8602adcc5a8de2eef)
+
 ### Screenshot
 ![Alt text](resources/Screenshot.png?raw=true "Arkasquash")

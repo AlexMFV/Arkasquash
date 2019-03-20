@@ -3,6 +3,9 @@
 
 - To play the game, run `main.py` from the "*scripts*" folder.
 
+### Classification
+- The game got 1st place in the competition 🏆
+
 ### Competition Rules
 - Individual Competition.
 - Use **only** Python 3 standard libraries and `graphics.py`
